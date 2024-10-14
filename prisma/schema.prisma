@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  clerkId   String   @unique
+  username  String   @unique
+  email     String   @unique
+  password  String?
+  threads   Thread[] @relation("UserThreads")
+  responses Response[] @relation("UserResponses")
+}
+
+model Thread {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  userId      String   @db.ObjectId
+  createdAt   DateTime @default(now())
+  modifiedAt  DateTime @updatedAt
+  categoryId  String   @db.ObjectId
+  category    Category @relation(fields: [categoryId], references: [id])
+  createdBy   User     @relation("UserThreads", fields: [userId], references: [id])
+  responses   Response[]
+  tags        ThreadTag[]
+}
+
+
+model Response {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  body       String
+  threadId   String   @db.ObjectId
+  userId     String   @db.ObjectId
+  createdAt  DateTime @default(now())
+  author     User     @relation("UserResponses", fields: [userId], references: [id])
+  thread     Thread   @relation(fields: [threadId], references: [id])
+}
+
+model Category {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  threads     Thread[]
+}
+
+model Tag {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  name   String   @unique
+  threads ThreadTag[]
+}
+
+model ThreadTag {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  threadId String   @db.ObjectId
+  tagId    String   @db.ObjectId
+  thread   Thread   @relation(fields: [threadId], references: [id])
+  tag      Tag      @relation(fields: [tagId], references: [id])
+}
