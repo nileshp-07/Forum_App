@@ -1,6 +1,5 @@
 import { formatDate } from '@/lib/utils';
-import Link from 'next/link';
-import React, { useState } from 'react'
+import React from 'react'
 
 const Thread = ({thread} : {thread : any}) => {
   console.log("Thread : ",thread);

@@ -6,7 +6,6 @@ import { createUser} from '@/lib/actions/user.action'
 
 export async function POST(req: Request) {
 
-  // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
   if (!WEBHOOK_SECRET) {
     throw new Error('Please add WEBHOOK_SECRET');
@@ -38,8 +37,6 @@ export async function POST(req: Request) {
     return new Response('Error occurred', { status: 400 });
   }
 
-  // Do something with the payload
-  // For this guide, you simply log the payload to the console
   const { id } = evt.data;
   const eventType = evt.type;
   
@@ -49,11 +46,8 @@ export async function POST(req: Request) {
 
      const user = {
       clerkId: id,
-      firstName: first_name!, //The non-null assertion operator (!) tells TypeScript that you are confident that the value will not be null or undefined.
-      lastName: last_name!,
       username: username!,
       email: email_addresses[0].email_address,
-      profileImage: image_url,
     };
 
     const newUser = await createUser(user);

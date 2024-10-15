@@ -1,6 +1,4 @@
 "use client"
-
-import { useRouter } from 'next/navigation';
 import { getAllCategories, getAllTags } from '@/lib/actions/category.action';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';

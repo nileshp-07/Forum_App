@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { getThreadsByCategory, getThreadsByTag } from '@/lib/actions/thread.action';
 import Thread from '@/components/shared/Thread';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 const Page = ({params} : {params: any}) => {

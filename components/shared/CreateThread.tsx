@@ -13,13 +13,10 @@ import {
 import { MultiSelect } from '../ui/Multiselect'
 import { Button } from '../ui/button'
 import { getAllCategories, getAllTags } from '@/lib/actions/category.action'
-import { createUser } from '@/lib/actions/user.action'
 import { createThread } from '@/lib/actions/thread.action'
-import { useRouter } from 'next/navigation'
 
 
 const CreateThread = ({closeModal} : {closeModal : () => void}) => {
-  const router = useRouter();
   const [formData, setFormData] = useState({
      title : "",
      categoryId : "",
@@ -27,7 +24,7 @@ const CreateThread = ({closeModal} : {closeModal : () => void}) => {
   })
   const [tags, setTags] = useState<any>([])
   const [categories, setCategories] = useState<any>([])
-  const userId = "670cfc4564aa08b93aea2032";
+  const userId = "670cfc4564aa08b93aea2032"; // As there is some issue with the deployement so i can't setup the webhook for the clerk that's why using the temporaray userId
 
   const tagList = tags.map((tag: any) => ({
     label: tag.name,

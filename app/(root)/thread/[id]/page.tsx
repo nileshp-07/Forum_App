@@ -6,13 +6,13 @@ import { Input } from '@/components/ui/input';
 import { createResponse, getAllResponses, getThreadById } from '@/lib/actions/thread.action';
 import React, { useEffect, useState } from 'react'
 
-const page = ({params} : {params: any}) => {
+const ThreadDetails = ({params} : {params: any}) => {
     const [threadDetails, setThreadDetails] = useState<any>({})
     const [responses, setResponses] = useState<any>([])
     const [loading, setLoading] = useState(false);
     const [reply, setReply] = useState("")
     const {id} = params;
-    const userId = "670cfc4564aa08b93aea2032";
+    const userId = "670cfc4564aa08b93aea2032";  // As there is some issue with the deployement so i can't setup the webhook for the clerk that's why using the temporaray userId
 
 
     const getThreadDetails = async() => {
@@ -88,4 +88,4 @@ const page = ({params} : {params: any}) => {
   )
 }
 
-export default page
+export default ThreadDetails;

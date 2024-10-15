@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React from 'react'
 import Thread from './Thread'
 import Pagination from './Pagination'
 

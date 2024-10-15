@@ -82,7 +82,7 @@ export const getThreadsByTag = async (tagName: string) => {
       include: {
         tags: {
           include: {
-            tag: true, // Include the tag details
+            tag: true,
           },
         },
         category: true,
